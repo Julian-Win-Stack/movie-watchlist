@@ -1,16 +1,20 @@
-// =====================
-// Config + DOM refs
-// =====================
 const apiKey = "8d158d28";
+
+// DOM
+const renderArea = document.getElementById("render-area");
+const formSubmit = document.getElementById("index-form");
+const watchlistArea = document.getElementById("watchlist-area");
+
+// State
+let renderData = "";
+let watchlist = "";
+
+
 const STORAGE_KEY = "watchlistIds";
 
-const renderArea = document.getElementById("render-area");
-const watchlistArea = document.getElementById("watchlist-area");
-const formSubmit = document.getElementById("index-form");
-
-// =====================
-// LocalStorage helpers
-// =====================
+// --------------------
+// LocalStorage
+// --------------------
 function getSavedIds() {
   return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 }
@@ -27,128 +31,152 @@ function removeId(imdbID) {
   const ids = getSavedIds();
   const newIds = ids.filter((id) => id !== imdbID);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(newIds));
+
+  // re-render watchlist page if you're on it
+  if (watchlistArea) renderWatchList();
 }
 
-// =====================
-// API helpers
-// =====================
-async function fetchJSON(url) {
-  const res = await fetch(url);
-  return res.json();
+// --------------------
+// API
+// --------------------
+async function getMovieDetails(imdbID) {
+
+  const res = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
+  return await res.json();
 }
 
-function getMovieDetails(imdbID) {
-  return fetchJSON(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
-}
-
-function searchByTitle(title) {
-  return fetchJSON(`https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`);
-}
-
-// =====================
-// HTML builder
-// =====================
-function movieCardHTML(movie, buttonIcon) {
-  // movie is OMDb "full details" response
-  return `
-    <div class="border">
-      <div>
-        <img src="${movie.Poster}" class="render-img">
-      </div>
-
-      <div class="movie-detail">
-        <div class="movie-title-section">
-          <h2>${movie.Title}</h2>
-          <span>★</span>
-          <p>${movie.imdbRating}</p>
-        </div>
-
-        <div class="movie-section-second">
-          <p>${movie.Runtime}</p>
-          <p>${movie.Genre}</p>
-
-          <button class="add-movie-btn" data-imdbid="${movie.imdbID}">
-            <img src="img/${buttonIcon}">
-            <p>Watchlist</p>
-          </button>
-        </div>
-
-        <div class="movie-summary">
-          <p>${movie.Plot}</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// =====================
-// Index page: search + render
-// =====================
 async function searchMovies(title) {
-  const data = await searchByTitle(title);
+  renderData = "";
 
-  // Guard: if API returns no Search array
+  
+  const res = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`);
+  const data = await res.json();
+
+  //if no results, don't crash on data.Search
   if (!data.Search) {
-    if (renderArea) renderArea.innerHTML = "";
+    render(renderData);
     return;
   }
 
-  let html = "";
+  for (const element of data.Search) {
+    const movieDetails = await getMovieDetails(element.imdbID);
 
-  for (const item of data.Search) {
-    const details = await getMovieDetails(item.imdbID);
-    html += movieCardHTML(details, "plus-icon.svg");
+    renderData += `
+      <div class="border">
+        <div>
+          <img src="${movieDetails.Poster}" class="render-img">
+        </div>
+
+        <div class="movie-detail">
+          <div class="movie-title-section">
+            <h2>${movieDetails.Title}</h2>
+            <span>★</span>
+            <p>${movieDetails.imdbRating}</p>
+          </div>
+
+          <div class="movie-section-second">
+            <p>${movieDetails.Runtime}</p>
+            <p>${movieDetails.Genre}</p>
+
+            <button class="add-movie-btn" data-imdbid="${element.imdbID}">
+              <img src="img/plus-icon.svg">
+              <p>Watchlist</p>
+            </button>
+          </div>
+
+          <div class="movie-summary">
+            <p>${movieDetails.Plot}</p>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
-  if (renderArea) renderArea.innerHTML = html;
+  render(renderData);
 }
 
-// =====================
-// Watchlist page: render + empty state
-// =====================
-async function renderWatchlist() {
+function render(movieData) {
+  if (!renderArea) return;
+  renderArea.innerHTML = movieData;
+}
+
+// --------------------
+// Watchlist render
+// --------------------
+async function renderWatchList() {
   if (!watchlistArea) return;
 
+  watchlist = "";
+  watchlistArea.innerHTML = "";
+
   const ids = getSavedIds();
-  let html = "";
 
   for (const id of ids) {
-    const details = await getMovieDetails(id);
-    html += movieCardHTML(details, "minus-icon.svg");
+    const data = await getMovieDetails(id);
+
+    watchlist += `
+      <div class="border">
+        <div>
+          <img src="${data.Poster}" class="render-img">
+        </div>
+
+        <div class="movie-detail">
+          <div class="movie-title-section">
+            <h2>${data.Title}</h2>
+            <span>★</span>
+            <p>${data.imdbRating}</p>
+          </div>
+
+          <div class="movie-section-second">
+            <p>${data.Runtime}</p>
+            <p>${data.Genre}</p>
+
+            <button class="add-movie-btn" data-imdbid="${id}">
+              <img src="img/minus-icon.svg">
+              <p>Watchlist</p>
+            </button>
+          </div>
+
+          <div class="movie-summary">
+            <p>${data.Plot}</p>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
-  watchlistArea.innerHTML = html;
-  updateWatchlistEmptyState();
+  watchlistArea.innerHTML = watchlist;
+  watchlistBackgroundText();
 }
 
-function updateWatchlistEmptyState() {
-  const emptyEl = document.getElementById("watchlist-background-text");
-  if (!emptyEl || !watchlistArea) return;
+function watchlistBackgroundText() {
+  if (!watchlistArea) return;
 
-  const ids = getSavedIds();
-  emptyEl.style.display = ids.length > 0 ? "none" : "flex";
+  const savedIds = getSavedIds();
+  const el = document.getElementById("watchlist-background-text");
+  if (!el) return;
+
+  el.style.display = savedIds.length > 0 ? "none" : "flex";
 }
 
-// =====================
+// --------------------
 // Events
-// =====================
+// --------------------
 if (formSubmit) {
-  formSubmit.addEventListener("submit", (e) => {
+  formSubmit.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const input = document.getElementById("search-bar");
-    const title = input.value.trim();
-    if (!title) return;
+    const movieName = document.getElementById("search-bar");
+    searchMovies(movieName.value);
 
-    searchMovies(title);
-    input.value = "";
+    movieName.value = "";
 
-    const emptySpace = document.getElementById("empty-space");
-    if (emptySpace) emptySpace.style.display = "none";
+    const empty = document.getElementById("empty-space");
+    if (empty) empty.style.display = "none";
   });
 }
 
-document.addEventListener("click", (e) => {
+document.addEventListener("click", function (e) {
   const button = e.target.closest(".add-movie-btn");
   if (!button) return;
 
@@ -158,12 +186,9 @@ document.addEventListener("click", (e) => {
     saveId(imdbID);
   } else if (watchlistArea) {
     removeId(imdbID);
-    renderWatchlist();
   }
 });
 
-// =====================
 // Init
-// =====================
-renderWatchlist();
-updateWatchlistEmptyState();
+renderWatchList();
+watchlistBackgroundText();
