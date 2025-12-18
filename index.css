@@ -1,223 +1,325 @@
-html,body{
-    margin: 0;
+/* ========== Base ========== */
+html, body {
+  margin: 0;
 }
 
-body{
-    font-family: "Inter", sans-serif;
-    background-color: #121212;
-    color: #FFFFFF;
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #121212;
+  color: #fff;
 }
 
-header{
-    position: relative;
-}
-
-.background-body{
-    color: #2E2E2F;
-}
-
-.upper-header{
-    display: flex;
-    flex-direction: row;
-    background-image: url("img/image 36 (1).png");
-    height: 25vh;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.upper-header h1{
-    font-size: 2.2rem;
-    font-weight: 800;
-}
-.upper-header a{
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 600;
-    
-    transition: transform 0.1s ease, opacity 0.1s ease;
-    text-decoration: none;
-    
-}
-
-.upper-header a:hover,.add-movie-btn:hover {
-    color: white;
-    opacity: 0.8;
-    cursor: pointer;
-}
-
-.upper-header a:visited{
-     color: white;
-     text-decoration: none;
-}
-/* Click (active) effect */
-.upper-header a:active,.add-movie-btn:active{
-    color: white;
-    transform: scale(0.96);   /* slight press effect */
-    opacity: 0.6;
-}
-
-form{
-    background-color: #2E2E2F;
-    display: flex;
-    flex-direction: row;
-    width: 90vw;
-    margin: 0 auto;
-    border-radius: 6px;
-    height: 35px;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-form button{
-    background-color: #4B4B4B;
-    border: none;
-    color: #FFFFFF;
-    height: 100%;
-    padding: 0 24px;
-    justify-content: space-around;
-    overflow: hidden;
-    border-radius: 0px 6px 6px 0px;
-    cursor: pointer;
-    transition: background-color 0.05s ease, transform 0.05s ease;
-}
-form button:hover{
-    background-color: #5A5A5A;
-}
-
-form button:active,.add-movie-btn:active{
-    background-color: #3E3E3E;
-    transform: scale(0.98);
-}
-
-form input{
-    background-color: inherit;
-    border: none;
-    flex: 1;
-}
-
-form svg{
-    color: grey;
-    padding: 0 10px;
-    /* stroke: #000000;
-    outline-color: #000000; */
-}
-
-.background-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 75vh;
-}
-.background-body svg{
-    width: 100px;
-}
-
-.background-body h2{
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-
-
-.watchlist-add-movie{
-    background-color: inherit;
-    border: none;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5em;
-    text-decoration: none;
-}
-
-.watchlist-add-movie img{
-    width: 16px;
-}
-
-.watchlist-add-movie h3{
-    font-size: 0.8rem;
-}
-
-.watchlist-background-body h2{
-    color: #787878;
-}
-#render-area,#watchlist-area{
-    padding: 2em;
-}
-.render-img{
-    width: 80px;
-}
-.movie-title-section, .movie-section-second,.add-movie-btn{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-}
-.movie-section-second,.add-movie-btn{
-    gap: 0.5em;
-}
-.movie-title-section{
-    gap: 0.2em;
-}
-
-.movie-title-section h2{
-    font-size: 0.8rem;
-    font-weight: 400;
-}
-.movie-title-section span{
-    color: #FEC654;
-    font-size: 0.65rem;
-}
-
-.movie-title-section p{
-    font-size: 0.65rem;
-}
-
-.movie-section-second p{
-    font-weight: 300;
-}
-.movie-section-second p,.movie-summary{
-    font-size: 0.7rem;
-} 
-
-.add-movie-btn{
-    background-color: inherit;
-    border: none;
-
-}
-.add-movie-btn img{
-    width: 14px;
-}
-
-.add-movie-btn p{
-    color: white;
-}
-
-.movie-summary{
-    color: #A5A5A5;
-}
-
-.border{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-bottom: 1px solid #2C2C2C;
-    gap: 1em;
-    padding: 0.5em 0em;
-}
-.general-sections{
-    margin: 0;
-}
 h1, h2, h3, p {
-    margin: 0;
+  margin: 0;
 }
-.movie-detail{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+
+/* ========== Header ========== */
+header {
+  position: relative;
 }
-#watchlist-background-text{
-    display: flex;
-    flex-direction: column;
-    gap: 0.3em;
+
+.upper-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  background-image: url("img/image 36 (1).png");
+  height: 25vh;
+}
+
+.upper-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.upper-header a {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.upper-header a:visited {
+  color: #fff;
+}
+
+/* ========== Form ========== */
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background-color: #2E2E2F;
+  width: 90vw;
+  height: 35px;
+  margin: 0 auto;
+  border-radius: 6px;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form svg {
+  color: grey;
+  padding: 0 10px;
+}
+
+form input {
+  background-color: inherit;
+  border: none;
+  flex: 1;
+  color: #fff;
+}
+
+form button {
+  background-color: #4B4B4B;
+  border: none;
+  color: #fff;
+  height: 100%;
+  padding: 0 24px;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+
+  transition: background-color 0.05s ease, transform 0.05s ease;
+}
+
+form button:hover {
+  background-color: #5A5A5A;
+}
+
+form button:active {
+  background-color: #3E3E3E;
+  transform: scale(0.98);
+}
+
+/* ========== Empty / Background States ========== */
+.background-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 75vh;
+  color: #2E2E2F;
+}
+
+.background-body svg {
+  width: 100px;
+}
+
+.background-body h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.watchlist-background-body h2 {
+  color: #787878;
+}
+
+#watchlist-background-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* ========== Lists / Areas ========== */
+#render-area,
+#watchlist-area {
+  padding: 2em;
+}
+
+.border {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-bottom: 1px solid #2C2C2C;
+  gap: 1em;
+  padding: 0.5em 0;
+}
+
+.render-img {
+  width: 80px;
+}
+
+.movie-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+/* shared flex row alignment */
+.movie-title-section,
+.movie-section-second,
+.add-movie-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.movie-title-section {
+  gap: 0.2em;
+}
+
+.movie-section-second,
+.add-movie-btn {
+  gap: 0.5em;
+}
+
+.movie-title-section h2 {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.movie-title-section span {
+  color: #FEC654;
+  font-size: 0.65rem;
+}
+
+.movie-title-section p {
+  font-size: 0.65rem;
+}
+
+.movie-section-second p {
+  font-weight: 300;
+  font-size: 0.7rem;
+}
+
+.movie-summary {
+  color: #A5A5A5;
+  font-size: 0.7rem;
+}
+
+.general-sections {
+  margin: 0;
+}
+
+/* ========== Buttons / Links (shared interactions) ========== */
+.add-movie-btn {
+  background-color: inherit;
+  border: none;
+}
+
+.add-movie-btn img {
+  width: 14px;
+}
+
+.add-movie-btn p {
+  color: #fff;
+}
+
+.watchlist-add-movie {
+  background-color: inherit;
+  border: none;
+  color: #fff;
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  text-decoration: none;
+}
+
+.watchlist-add-movie img {
+  width: 16px;
+}
+
+.watchlist-add-movie h3 {
+  font-size: 0.8rem;
+}
+
+/* shared hover/active */
+.upper-header a:hover,
+.add-movie-btn:hover,
+.watchlist-add-movie:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.upper-header a:active,
+.add-movie-btn:active,
+.watchlist-add-movie:active {
+  transform: scale(0.96);
+  opacity: 0.6;
+}
+
+/* ========== Responsive ========== */
+@media (min-width: 600px) {
+  .upper-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .upper-header a {
+    font-size: 1.2rem;
+  }
+
+  .search-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  form {
+    height: 50px;
+  }
+
+  #search-bar,
+  #search-bar::placeholder,
+  form button {
+    font-size: 1rem;
+  }
+
+  #empty-space img {
+    width: 100px;
+  }
+
+  #empty-space h2 {
+    font-size: 1.5rem;
+  }
+
+  #empty-space {
+    gap: 1rem;
+  }
+
+  #watchlist-background-text h2 {
+    font-size: 1.5rem;
+  }
+
+  #watchlist-background-text img {
+    width: 20px;
+  }
+
+  #watchlist-background-text h3 {
+    font-size: 1rem;
+  }
+
+  .render-img {
+    width: 180px;
+  }
+
+  .movie-title-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .movie-title-section span,
+  .movie-title-section p {
+    font-size: 1rem;
+  }
+
+  .movie-section-second p {
+    font-size: 0.9rem;
+  }
+
+  .movie-section-second img {
+    width: 15px;
+  }
+
+  .movie-summary p {
+    font-size: 1rem;
+  }
+
+  .movie-detail {
+    gap: 1.2em;
+  }
 }
