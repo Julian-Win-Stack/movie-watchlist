@@ -124,6 +124,7 @@ async function renderWatchList() {
         </div>`
     }
     watchlistArea.innerHTML = watchlist
+    watchlistBackgroundText()
     
 }
 function checkRenderWatchlist(){
@@ -133,9 +134,15 @@ function checkRenderWatchlist(){
 }
 checkRenderWatchlist()
 
-const saveIds = getSavedIds()
-if (saveIds.length > 0 && watchlistArea){
-    document.getElementById('watchlist-background-text').style.display = 'none'
+function watchlistBackgroundText(){
+        const saveIds = getSavedIds()
+    if (saveIds.length > 0 && watchlistArea){
+        document.getElementById('watchlist-background-text').style.display = 'none'
+    } else if (saveIds.length === 0 && watchlistArea){
+        document.getElementById('watchlist-background-text').style.display = 'flex'
+    }
 }
+
+watchlistBackgroundText()
 
 

@@ -216,4 +216,8 @@ h1, h2, h3, p {
     flex-direction: column;
     gap: 0.5em;
 }
-
+#watchlist-background-text{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
