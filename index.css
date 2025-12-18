@@ -1,0 +1,219 @@
+html,body{
+    margin: 0;
+}
+
+body{
+    font-family: "Inter", sans-serif;
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+header{
+    position: relative;
+}
+
+.background-body{
+    color: #2E2E2F;
+}
+
+.upper-header{
+    display: flex;
+    flex-direction: row;
+    background-image: url("img/image 36 (1).png");
+    height: 25vh;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.upper-header h1{
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+.upper-header a{
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    
+    transition: transform 0.1s ease, opacity 0.1s ease;
+    text-decoration: none;
+    
+}
+
+.upper-header a:hover,.add-movie-btn:hover {
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.upper-header a:visited{
+     color: white;
+     text-decoration: none;
+}
+/* Click (active) effect */
+.upper-header a:active,.add-movie-btn:active{
+    color: white;
+    transform: scale(0.96);   /* slight press effect */
+    opacity: 0.6;
+}
+
+form{
+    background-color: #2E2E2F;
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    margin: 0 auto;
+    border-radius: 6px;
+    height: 35px;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+form button{
+    background-color: #4B4B4B;
+    border: none;
+    color: #FFFFFF;
+    height: 100%;
+    padding: 0 24px;
+    justify-content: space-around;
+    overflow: hidden;
+    border-radius: 0px 6px 6px 0px;
+    cursor: pointer;
+    transition: background-color 0.05s ease, transform 0.05s ease;
+}
+form button:hover{
+    background-color: #5A5A5A;
+}
+
+form button:active,.add-movie-btn:active{
+    background-color: #3E3E3E;
+    transform: scale(0.98);
+}
+
+form input{
+    background-color: inherit;
+    border: none;
+    flex: 1;
+}
+
+form svg{
+    color: grey;
+    padding: 0 10px;
+    /* stroke: #000000;
+    outline-color: #000000; */
+}
+
+.background-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+.background-body svg{
+    width: 100px;
+}
+
+.background-body h2{
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+
+.watchlist-add-movie{
+    background-color: inherit;
+    border: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    text-decoration: none;
+}
+
+.watchlist-add-movie img{
+    width: 16px;
+}
+
+.watchlist-add-movie h3{
+    font-size: 0.8rem;
+}
+
+.watchlist-background-body h2{
+    color: #787878;
+}
+#render-area,#watchlist-area{
+    padding: 2em;
+}
+.render-img{
+    width: 80px;
+}
+.movie-title-section, .movie-section-second,.add-movie-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+.movie-section-second,.add-movie-btn{
+    gap: 0.5em;
+}
+.movie-title-section{
+    gap: 0.2em;
+}
+
+.movie-title-section h2{
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+.movie-title-section span{
+    color: #FEC654;
+    font-size: 0.65rem;
+}
+
+.movie-title-section p{
+    font-size: 0.65rem;
+}
+
+.movie-section-second p{
+    font-weight: 300;
+}
+.movie-section-second p,.movie-summary{
+    font-size: 0.7rem;
+} 
+
+.add-movie-btn{
+    background-color: inherit;
+    border: none;
+
+}
+.add-movie-btn img{
+    width: 14px;
+}
+
+.add-movie-btn p{
+    color: white;
+}
+
+.movie-summary{
+    color: #A5A5A5;
+}
+
+.border{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #2C2C2C;
+    gap: 1em;
+    padding: 0.5em 0em;
+}
+.general-sections{
+    margin: 0;
+}
+h1, h2, h3, p {
+    margin: 0;
+}
+.movie-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
