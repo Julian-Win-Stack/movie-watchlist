@@ -38,11 +38,11 @@ async function fetchJSON(url) {
 }
 
 function getMovieDetails(imdbID) {
-  return fetchJSON(`http://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
+  return fetchJSON(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
 }
 
 function searchByTitle(title) {
-  return fetchJSON(`http://www.omdbapi.com/?apikey=${apiKey}&s=${title}`);
+  return fetchJSON(`https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`);
 }
 
 // =====================
